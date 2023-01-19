@@ -1,7 +1,7 @@
 FROM ruby:3.0-alpine
 RUN apk update
 RUN apk add build-base
-RUN apk add --virtual .builddeps util-linux-misc git lapack libstdc++ cmake g++ gcc gfortran musl-dev lapack-dev openblas-dev openssl-dev
+RUN apk add --virtual .builddeps util-linux-misc git lapack libstdc++ cmake g++ gcc gfortran musl-dev lapack-dev openblas-dev openssl-dev libxml2-dev libxslt-dev
 RUN apk add python3 py3-pip python3-dev
 RUN pip3 install --upgrade pip
 RUN pip3 install wheel
@@ -18,6 +18,7 @@ RUN export LAPACK=/usr/lib/liblapack.so.3
 RUN python3 setup.py build
 RUN python3 setup.py install --prefix=/usr/lib/python3.10/site-packages
 # Build pyarrow from source
+WORKDIR /
 RUN git clone https://github.com/apache/arrow.git
 WORKDIR /arrow
 RUN git checkout apache-arrow-11.0.0
@@ -25,8 +26,8 @@ RUN git submodule update --init --recursive
 RUN export PARQUET_TEST_DATA="${PWD}/cpp/submodules/parquet-testing/data"
 RUN export ARROW_TEST_DATA="${PWD}/testing/data"
 WORKDIR /
-RUN python3 -m venv pyarrow-dev
-RUN source pyarrow-dev/bin/activate
+# RUN python3 -m venv pyarrow-dev
+# RUN source pyarrow-dev/bin/activate
 RUN pip3 install -r arrow/python/requirements-build.txt
 RUN mkdir dist
 RUN export ARROW_HOME="$(pwd)/dist"
@@ -64,11 +65,12 @@ RUN export Parquet_DIR=/dist/lib/cmake/Parquet
 RUN python3 setup.py build_ext --inplace
 RUN python3 setup.py build_ext --build-type=release --bundle-arrow-cpp bdist_wheel
 RUN pip3 install dist/pyarrow-11.0.0-cp310-cp310-linux_aarch64.whl
-RUN deactivate
+# RUN deactivate
 # # Install fastai
 WORKDIR /
 RUN pip3 install -U fastcore fastai ipywidgets
 RUN rm -rf /scipy
 RUN rm -rf /arrow
 RUN apk del .builddeps
+# Add Ruby on Rails layers here
 CMD ["bash", "-l"]
