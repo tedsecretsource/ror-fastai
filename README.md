@@ -19,5 +19,6 @@ M1 = linux/arm64 or linux/arm64/v8 (the last bit is not strictly necessary)
 
 * [Crucially helpful](https://www.docker.com/blog/multi-arch-images/)
 * [Building SciPy from source](https://docs.scipy.org/doc//scipy-1.4.1/reference/building/linux.html)
+* [Building pyarrow from source](https://arrow.apache.org/docs/developers/python.html#python-development)
 * [How to Build Multi-Arch Docker Images for MacBook M1](https://raynix.info/archives/4305) (includes very helpful explanation of some docker environment variables TARGETOS, TARGETARCH, et al and clarifies that `arm64` is the same fucking thing as `aarch64`)
 * [Publishing a docker image to dockerhub via a github action](https://medium.com/platformer-blog/lets-publish-a-docker-image-to-docker-hub-using-a-github-action-f0b17e5cceb3)
