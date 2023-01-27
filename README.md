@@ -1,5 +1,5 @@
 # ror-fastai
-Alpine-based Ruby on Rails server that includes fastai
+Bullseye-based Ruby on Rails server that includes fastai
 
 ## Why?
 
@@ -11,7 +11,7 @@ I started with a base ruby machine that is cross-platform and then installed pyt
 
 ## Issues
 
-The only real issue I had was installing SciPy and pyarrow, dependencies of fastai. I had to build SciPy from source. There is [an issue](https://github.com/apache/arrow/issues/14920) in pyarrow that requires you also make it from source.
+I first tried using an Apline distro but there simply isn't enough support for ML. I found myself having to build a lot of packages from source. I switched to Debian Bullseye and things got much easier, but the image is also much larger (for AMD64).
 
 M1 = linux/arm64 or linux/arm64/v8 (the last bit is not strictly necessary)
 
