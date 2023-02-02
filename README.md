@@ -1,5 +1,5 @@
-# ror-fastai
-Bullseye-based Ruby on Rails server that includes fastai
+# ruby-fastai
+Bullseye-based ruby image that includes fastai
 
 ## Why?
 
